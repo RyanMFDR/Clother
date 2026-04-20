@@ -21,7 +21,11 @@ struct ContentView: View {
                 HStack{
                     Image(systemName: "location.fill")
                     Text("Kabupaten Badung")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                    
                 }
+                //outfit picker
                 ZStack{
                     Image(systemName: "figure.arms.open")
                         .resizable()
@@ -29,36 +33,75 @@ struct ContentView: View {
                         .frame(width: 400, height: 400)
                         .foregroundStyle(Color.white)
                     VStack{
-                        Spacer()
+                        
+                        //shirt scroller
                         HStack{
                             Image(systemName: "chevron.left")
                             Spacer()
                             Image(systemName: "tshirt.fill")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 200, height: 200)
+                                .frame(width: 200, height: 158)
                                 .foregroundStyle(Color.blue)
                                 
                             Spacer()
                             Image(systemName: "chevron.right")
-                        }.padding(10)
+                        }
+                        
+                        //pants scroller
                         HStack{
                             Image(systemName: "chevron.left")
                             Spacer()
                             Image(systemName: "square.fill")
                                 .resizable()
-                                .scaledToFit()
+                                .scaledToFill()
                                 .frame(width: 100, height: 100)
                                 .foregroundStyle(Color.blue)
                                 
                             Spacer()
                             Image(systemName: "chevron.right")
-                        }.padding(10)
-                    }
+                        }.padding(0)
+                    }.padding(.top,50)
                     
                 }
                 
+                Text("Hello, World!")
+                    .font(.title)
+                    .fontWeight(.bold)
+                Text("Hello, World!")
+                    .font(.subheadline)
                 
+                //feels like card
+                HStack{
+                    Spacer()
+                    VStack{
+                        Text("Feels Like")
+                        Text("20°C")
+                        Text("This will be the time picker")
+                        
+                    }
+                    Spacer()
+                }
+                .padding()
+                .background(Color.white.opacity(0.5))
+                .cornerRadius(20)
+                .padding()
+                
+                //temp detail card
+                VStack{
+                    HStack{
+                        Text("Temperature")
+                        Spacer()
+                        Text("20°C")
+                        
+                    }
+                    Divider()
+                    
+                }
+                .padding()
+                .background(Color.white.opacity(0.5))
+                .cornerRadius(20)
+                .padding()
             }
         }
     }
