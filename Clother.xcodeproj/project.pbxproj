@@ -16,6 +16,11 @@
 			path = Clother;
 			sourceTree = "<group>";
 		};
+		A01A050A2F97409D0075EEA8 /* Pages */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Pages;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +39,7 @@
 			children = (
 				169635952F9225DD00CA6B82 /* Clother */,
 				169635942F9225DD00CA6B82 /* Products */,
+				A01A050A2F97409D0075EEA8 /* Pages */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +68,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				169635952F9225DD00CA6B82 /* Clother */,
+				A01A050A2F97409D0075EEA8 /* Pages */,
 			);
 			name = Clother;
 			packageProductDependencies = (
