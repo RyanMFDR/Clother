@@ -10,7 +10,7 @@ struct LocationListView: View {
     @State private var savedLocations: [DailyWeather] = [
         generateRandomWeather(for: "Jakarta"),
         generateRandomWeather(for: "Jogja"),
-        generateRandomWeather(for: "Purwokerto")
+        generateRandomWeather(for: "Bali")
     ]
     var body: some View {
         NavigationStack {

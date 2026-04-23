@@ -126,7 +126,7 @@ struct LocPage: View {
                                 HStack {
                                     Text(location)
                                         .fontWeight(.semibold)
-                                        .foregroundStyle(Color.black)
+                                        .foregroundStyle(Color.white)
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             }

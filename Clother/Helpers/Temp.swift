@@ -45,7 +45,7 @@ struct DailyWeather : Identifiable {
 //
 //var sunny_top = ["tee", "men_tee", "polo_shirt", "tank_top"]
 
-//MARK: - Weather Color
+//MARK: - Weather Color (Canceled)
 //enum WeatherColor {
 //    case sunny, rainy, cloudy, stormy
 //    
@@ -121,6 +121,10 @@ enum WeatherCondition: String, CaseIterable {
         
         }
     }
+//    var backgroundAnimaiton:String {
+//        switch self {
+//        }
+//    }
 }
 
 //MARK: - Random Weather Generator
