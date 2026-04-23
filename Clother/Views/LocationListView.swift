@@ -10,7 +10,7 @@ struct LocationListView: View {
     @State private var savedLocations: [DailyWeather] = [
         generateRandomWeather(for: "Jakarta"),
         generateRandomWeather(for: "Jogja"),
-        generateRandomWeather(for: "Purwokerto")
+        generateRandomWeather(for: "Bali")
     ]
     var body: some View {
         NavigationStack {
@@ -24,6 +24,7 @@ struct LocationListView: View {
                         ForEach(savedLocations) { item in
                             NavigationLink { ///To Each Main Page
                                 ContentView(weather: item)
+                                    .navigationBarBackButtonHidden(true)
                             } label: { ///The Card
                                 CardLocation(weather: item)
                             }
