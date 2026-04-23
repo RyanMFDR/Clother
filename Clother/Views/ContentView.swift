@@ -34,9 +34,16 @@ struct ContentView: View {
                 Spacer()
                 HStack{
                     Image(systemName: "location.fill")
-                    Text(weather.location)
-                        .font(.title3)
-                        .fontWeight(.semibold)
+                    NavigationLink{
+                        LocationListView()
+                            .navigationBarBackButtonHidden(true)
+                    } label:{
+                        Text(weather.location)
+                            .font(.title3)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                    }
+                    
                     
                 }
                 //outfit picker
@@ -82,7 +89,7 @@ struct ContentView: View {
 //                            Spacer()
 //                            Image(systemName: "chevron.right")
 //                        }.padding(.horizontal,10)
-                    }.padding(.top,50)
+                    }.padding(.top,0)
                     
                 }
                 
@@ -97,7 +104,7 @@ struct ContentView: View {
                     Spacer()
                     VStack{
                         Text("Feels Like")
-                        Text(weather.feelsLike + "°C")
+                        Text(weather.feelsLike + "C")
                             .font(.system(size: 50, weight: .bold))
 //                        Text(weather.WeatherCondition.rawValue)
 //                            .font(.title)

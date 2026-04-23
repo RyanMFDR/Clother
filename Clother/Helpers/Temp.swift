@@ -87,11 +87,11 @@ enum WeatherCondition: String, CaseIterable {
         case .sunny:
             return ["tee", "men_tee", "polo_shirt", "tank_top"]
         case .rainy:
-            return ["hoodie", "emo_shirt"]
+            return ["hoodie", "emo_shirt","jacket_scarf"]
         case .cloudy:
             return ["boxy_shirt", "jacket_scarf", "plaid_shirt"]
         case .stormy:
-            return ["cardigan", "turtleneck"]
+            return ["cardigan", "turtleneck", "hoodie"]
         
         }
     }
@@ -113,7 +113,7 @@ enum WeatherCondition: String, CaseIterable {
         case .sunny:
             return "Wear light and breathable clothing."
         case .rainy:
-            return "Wear warm, breathable fabrics and perhaps some waterproof outerwear."
+            return "Wear warm and perhaps some waterproof outerwear."
         case .cloudy:
             return "Wear layered clothing to keep warm."
         case .stormy:
