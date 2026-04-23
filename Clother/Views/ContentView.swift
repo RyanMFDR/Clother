@@ -9,7 +9,7 @@ import SwiftUI
 import Lottie
 
 struct ContentView: View {
-    let sunny_top = ["tee", "men_tee", "polo_shirt"]
+    
     let sunny_bottom = ["short_pants", "long_skirt","short_skirt"]
     var weather: DailyWeather
     var body: some View {
@@ -61,11 +61,11 @@ struct ContentView: View {
 //                            Spacer()
 //                            Image(systemName: "chevron.right")
 //                        }.padding(.horizontal,10)
-                        Clothes_Caroussel(clothes: sunny_top)
+                        Clothes_Caroussel(clothes: weather.WeatherCondition.topClothes)
                             .frame(width: .infinity, height: 150)
                             .clipped(antialiased: false)
                         
-                        Clothes_Caroussel(clothes: sunny_bottom)
+                        Clothes_Caroussel(clothes: weather.WeatherCondition.bottomClothes)
                             .frame(width: .infinity, height: 150)
                             .clipped(antialiased: false)
                         
@@ -86,10 +86,10 @@ struct ContentView: View {
                     
                 }
                 
-                Text("Hello, World!")
+                Text("The weather is " + weather.WeatherCondition.rawValue)
                     .font(.title)
                     .fontWeight(.bold)
-                Text("Hello, World!")
+                Text(weather.WeatherCondition.clothingDescription)
                     .font(.subheadline)
                 
                 //feels like card
@@ -97,10 +97,11 @@ struct ContentView: View {
                     Spacer()
                     VStack{
                         Text("Feels Like")
-                        Text(weather.feelsLike)
+                        Text(weather.feelsLike + "°C")
                             .font(.system(size: 50, weight: .bold))
-                        Text("This will be the time picker")
-                        
+//                        Text(weather.WeatherCondition.rawValue)
+//                            .font(.title)
+//
                     }
                     Spacer()
                 }

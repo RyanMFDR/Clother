@@ -100,7 +100,7 @@ struct cardBackground: View {
                     low: "20",
                     humidity: "92%",
                     location: "Bogor",
-                    WeatherCondition: .stormy
+                    WeatherCondition: .stormy,
                     )
     )
 }
