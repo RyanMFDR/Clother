@@ -18,8 +18,32 @@ struct DailyWeather : Identifiable {
     var location: String
 //    var WeatherColor: WeatherColor
     var WeatherCondition: WeatherCondition
+//    var Clothes: [String]
     //var date
 }
+
+//enum Clothes: String, CaseIterable {
+//    case sunny = "Sunny"
+//    case cloudy = "Cloudy"
+//    case rainy = "Rainy"
+//    case stormy = "Stormy"
+//    
+//    var clothes: [String] {
+//        switch self {
+//        case .sunny:
+//            return ["tee", "men_tee", "polo_shirt", "tank_top"]
+//        case .rainy:
+//            return ["hoodie", "emo_shirt"]
+//        case .cloudy:
+//            return ["boxy_shirt", "jacket_scarf", "plaid_shirt"]
+//        case .stormy:
+//            return ["cardigan", "turtleneck"]
+//        
+//        }
+//    }
+//}
+//
+//var sunny_top = ["tee", "men_tee", "polo_shirt", "tank_top"]
 
 //MARK: - Weather Color
 //enum WeatherColor {
@@ -56,6 +80,45 @@ enum WeatherCondition: String, CaseIterable {
             return .gray
         case .stormy:
             return .red
+        }
+    }
+    var topClothes: [String] {
+        switch self {
+        case .sunny:
+            return ["tee", "men_tee", "polo_shirt", "tank_top"]
+        case .rainy:
+            return ["hoodie", "emo_shirt"]
+        case .cloudy:
+            return ["boxy_shirt", "jacket_scarf", "plaid_shirt"]
+        case .stormy:
+            return ["cardigan", "turtleneck"]
+        
+        }
+    }
+    var bottomClothes: [String] {
+        switch self {
+        case .sunny:
+            return ["short_pants", "long_skirt","short_skirt","chinos"]
+        case .rainy:
+            return ["sweatpants","flare_pants", "track_pants"]
+        case .cloudy:
+            return ["jeans", "sweatpants", "track_pants","chinos"]
+        case .stormy:
+            return ["sweatpants", "track_pants"]
+        
+        }
+    }
+    var clothingDescription: String {
+        switch self {
+        case .sunny:
+            return "Wear light and breathable clothing."
+        case .rainy:
+            return "Wear warm, breathable fabrics and perhaps some waterproof outerwear."
+        case .cloudy:
+            return "Wear layered clothing to keep warm."
+        case .stormy:
+            return "Wear thick clothing and sturdy boots."
+        
         }
     }
 }
@@ -103,6 +166,6 @@ func generateRandomWeather(for city:String) -> DailyWeather {
         humidity: "80%",
         location: city,
 //        WeatherColor: selectedWeather.1,
-        WeatherCondition: selectedWeather
+        WeatherCondition: selectedWeather,
         )
 }

@@ -11,8 +11,8 @@ import SwiftUI
 
 struct Clothes_Caroussel: View {
 //    let title : String
-    let clothes: [String]
-    
+//    let clothes: [String]
+    var clothes : [String]
     @State var selected = 0
 //    var clothes: Clothes
     let sunny_top = ["tee", "men_tee", "polo_shirt"]
