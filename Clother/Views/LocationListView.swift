@@ -30,8 +30,10 @@ struct LocationListView: View {
                             }
                         }
                     }
+                    
                     .padding(.top, 10)
                     .padding(.bottom, 90)
+                    
                 }
                 
                 //searchBar
