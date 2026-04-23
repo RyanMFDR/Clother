@@ -96,10 +96,10 @@ func generateRandomWeather(for city:String) -> DailyWeather {
         }
     
     return DailyWeather(
-        temp: "\(temp)",
-        feelsLike: "\(temp)",
-        high: "\(temp)",
-        low: "\(temp)",
+        temp: "\(temp)°",
+        feelsLike: "\(temp)°",
+        high: "\(temp)°",
+        low: "\(temp)°",
         humidity: "80%",
         location: city,
 //        WeatherColor: selectedWeather.1,
