@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Lottie
 
 struct ContentView: View {
     
@@ -17,6 +18,16 @@ struct ContentView: View {
             //background
             LinearGradient(colors: [weather.WeatherCondition.color, Color.white], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(edges: .all)
+            
+            ///Animation
+            LottieView(animation: .named("Rain.json"))
+                .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+                .offset(y:-80)
+            LottieView(animation: .named("cloud.json"))
+                .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+                .offset(y:-340)
+                .scaleEffect(1)
+                .blur(radius: 2)
             
             //start scroll view
             ScrollView(.vertical, showsIndicators: false){
@@ -147,5 +158,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(weather: generateRandomWeather(for: "London"))
+    ContentView(weather: generateRandomWeather(for: "Bali"))
 }
