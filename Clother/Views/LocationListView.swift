@@ -24,13 +24,16 @@ struct LocationListView: View {
                         ForEach(savedLocations) { item in
                             NavigationLink { ///To Each Main Page
                                 ContentView(weather: item)
+                                    .navigationBarBackButtonHidden(true)
                             } label: { ///The Card
                                 CardLocation(weather: item)
                             }
                         }
                     }
+                    
                     .padding(.top, 10)
                     .padding(.bottom, 90)
+                    
                 }
                 
                 //searchBar
