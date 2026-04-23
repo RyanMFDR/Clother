@@ -8,25 +8,12 @@
 import SwiftUI
 import AVKit
 
-enum weatherCondition: String {
-    case sunny = "Sunny"
-    case cloudy = "Cloudy"
-    case rainy = "Rainy"
-    case storm = "Storm"
-}
-
 struct CardLocation: View {
-    
-    var City: String
-    var Time: String
-    var Temp: String
-    var Weather: String
-    var Coordinate: String
-    var condition : weatherCondition
+    var weather : DailyWeather
     
     var body: some View {
         ZStack {
-            cardBackground(condition: condition)
+            cardBackground(condition: weather.WeatherCondition)
     
             LinearGradient(
                 colors: [
@@ -40,26 +27,24 @@ struct CardLocation: View {
             //Card
             HStack {
                 VStack(alignment: .leading, spacing: 18) {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(City)
-                            .font(.title3)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(weather.location)
+                            .font(.title)
                             .fontWeight(.semibold)
-                        Text(Time)
+                        Text("17:00")
                             .font(.subheadline)
                             .opacity(0.9)
+                            .padding(.bottom,10)
                     }
-                    Text(Weather)
+                    Text(weather.WeatherCondition.rawValue)
                         .font(.headline)
                         .fontWeight(.medium)
                 }
                 Spacer()
                 
                 VStack(alignment: .trailing, spacing: 18) {
-                    Text(Temp)
-                        .font(.system(size: 40, weight: .bold))
-                    Text(Coordinate)
-                        .font(.caption)
-                        .opacity(0.9)
+                    Text(weather.temp)
+                        .font(.system(size: 58, weight: .bold))
                 }
             }
             .foregroundColor(.white)
@@ -77,16 +62,16 @@ struct CardLocation: View {
 }
 
 struct cardBackground: View {
-    var condition : weatherCondition
-    
+    var condition : WeatherCondition
     var body: some View {
         VideoPlayer(player: makePlayer())
             .scaledToFill()
             .disabled(true)
     }
-    
     func makePlayer() -> AVPlayer {
-        let url = Bundle.main.url(forResource: condition.rawValue, withExtension: "mp4")!
+        guard let url = Bundle.main.url(forResource: condition.rawValue, withExtension: "mp4") else {
+            return AVPlayer()
+        }
         let player = AVPlayer(url: url)
         
         player.isMuted = true
@@ -108,11 +93,14 @@ struct cardBackground: View {
 
 #Preview {
     CardLocation(
-        City: "Kabupaten Badung",
-        Time: "15:00",
-        Temp: "30°",
-        Weather: "Moderate Rain",
-        Coordinate: "H:29° L:24°",
-        condition: .cloudy
+        weather: DailyWeather(
+                    temp: "24",
+                    feelsLike: "22",
+                    high: "26",
+                    low: "20",
+                    humidity: "92%",
+                    location: "Bogor",
+                    WeatherCondition: .stormy
+                    )
     )
 }
