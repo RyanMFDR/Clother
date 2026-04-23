@@ -10,16 +10,12 @@ import SwiftUI
 struct ContentView: View {
     let sunny_top = ["tee", "men_tee", "polo_shirt"]
     let sunny_bottom = ["short_pants", "long_skirt","short_skirt"]
-    
-    var weatherData: [DailyWeather] = [
-        DailyWeather(temp: "31°", weather: "Sunny", feelsLike: "32°", high: "32°", low: "28°", humidity: "80%", location: "Kabupaten Badung", weatherColor: .sunny),
-    ]
-    
+    var weather: DailyWeather
     var body: some View {
         
         ZStack{
             //background
-            LinearGradient(colors: [weatherData[0].weatherColor.color, Color.white], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [weather.WeatherCondition.color, Color.white], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(edges: .all)
             
             //start scroll view
@@ -27,7 +23,7 @@ struct ContentView: View {
                 Spacer()
                 HStack{
                     Image(systemName: "location.fill")
-                    Text(weatherData[0].location)
+                    Text(weather.location)
                         .font(.title3)
                         .fontWeight(.semibold)
                     
@@ -90,7 +86,7 @@ struct ContentView: View {
                     Spacer()
                     VStack{
                         Text("Feels Like")
-                        Text(weatherData[0].feelsLike)
+                        Text(weather.feelsLike)
                             .font(.system(size: 50, weight: .bold))
                         Text("This will be the time picker")
                         
@@ -107,35 +103,35 @@ struct ContentView: View {
                     HStack{
                         Text("Temperature")
                         Spacer()
-                        Text(weatherData[0].temp)
+                        Text(weather.temp)
                     }
                     Divider()
                     
                     HStack{
                         Text("Feels Like")
                         Spacer()
-                        Text(weatherData[0].feelsLike)
+                        Text(weather.feelsLike)
                     }
                     Divider()
                     
                     HStack{
                         Text("High")
                         Spacer()
-                        Text(weatherData[0].high)
+                        Text(weather.high)
                     }
                     Divider()
                     
                     HStack{
                         Text("Low")
                         Spacer()
-                        Text(weatherData[0].low)
+                        Text(weather.low)
                     }
                     Divider()
                     
                     HStack{
                         Text("Humidity")
                         Spacer()
-                        Text(weatherData[0].humidity)
+                        Text(weather.humidity)
                     }
                     
                     
@@ -150,7 +146,4 @@ struct ContentView: View {
 }
 
 #Preview {
-    
-    let sunny_top = ["tee", "men_tee", "polo_shirt"]
-    ContentView()
 }

@@ -9,8 +9,10 @@ import SwiftUI
 
 
 struct LocPage: View {
-    @State var searchText = ""
-    var currentLocations = "Ambon"
+    @State private var searchText = ""
+    @Binding var savedLocations: [DailyWeather]
+    @Binding var showLocPage : Bool
+    let currentLocations = "Jogja"
     
     let locations = [
             "Kabupaten Badung",
@@ -117,11 +119,17 @@ struct LocPage: View {
                         }
                         
                         ForEach(filteredLocations, id: \.self) { location in
-                            HStack {
-                                Text(location)
-                                    .fontWeight(.semibold)
+                            Button {
+                                savedLocations.append(generateRandomWeather(for: location))
+                                showLocPage = false
+                            } label:{
+                                HStack {
+                                    Text(location)
+                                        .fontWeight(.semibold)
+                                        .foregroundStyle(Color.black)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }
                     .padding()
@@ -133,6 +141,5 @@ struct LocPage: View {
 }
 
 #Preview {
-    LocPage()
 }
 
