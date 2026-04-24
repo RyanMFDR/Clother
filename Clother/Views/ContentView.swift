@@ -9,19 +9,32 @@ import SwiftUI
 import Lottie
 
 struct ContentView: View {
-    var weather: DailyWeather
+    @State private var selectedDate = Date()
+    
+//    let selectedLocation : String
+    let maxDate = Date().addingTimeInterval(864_000)
+    let sunny_bottom = ["short_pants", "long_skirt","short_skirt"]
+    @State var weather: DailyWeather
+    
+    var nextTenDays: [Date] {
+        (0..<10).compactMap { day in
+            Calendar.current.date(byAdding: .day, value: day, to: .now)
+        }
+    }
+    
     var body: some View {
+        
         NavigationStack {
             ZStack{
                 //background
-                LinearGradient(colors: [weather.WeatherCondition.color, Color.white], startPoint: .top, endPoint: .bottom)
+                LinearGradient(colors: [weather.WeatherCondition.color, Color(.systemBackground)], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea(edges: .all)
                 
                 ///Animation
                 LottieView(animation: .named("Rain.json"))
                     .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
                     .offset(y:-80)
-                LottieView(animation: .named("clouds loop.json"))
+                LottieView(animation: .named("cloud.json"))
                     .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
                     .offset(y:-340)
                     .scaleEffect(1)
@@ -31,15 +44,18 @@ struct ContentView: View {
                 ScrollView(.vertical, showsIndicators: false){
                     Spacer()
                     HStack{
+                        Image(systemName: "location.fill")
                         NavigationLink{
                             LocationListView()
                                 .navigationBarBackButtonHidden(true)
-                        } label: {
-                            Image(systemName: "location.fill")
+                        } label:{
                             Text(weather.location)
                                 .font(.title3)
                                 .fontWeight(.semibold)
-                        }.foregroundStyle(Color.black)
+                                .foregroundColor(.primary)
+                        }
+                        
+                        
                     }
                     //outfit picker
                     ZStack{
@@ -59,7 +75,7 @@ struct ContentView: View {
                             //                                .scaledToFit()
                             //                                .frame(width: 300, height: 150)
                             //                                .foregroundStyle(Color.blue)
-                            //
+                            //                                
                             //                            Spacer()
                             //                            Image(systemName: "chevron.right")
                             //                        }.padding(.horizontal,10)
@@ -80,11 +96,11 @@ struct ContentView: View {
                             //                                .scaledToFill()
                             //                                .frame(width: 150, height: 150)
                             //                                .foregroundStyle(Color.blue)
-                            //
+                            //                                
                             //                            Spacer()
                             //                            Image(systemName: "chevron.right")
                             //                        }.padding(.horizontal,10)
-                        }.padding(.top,50)
+                        }.padding(.top,0)
                         
                     }
                     
@@ -104,11 +120,23 @@ struct ContentView: View {
                             //                        Text(weather.WeatherCondition.rawValue)
                             //                            .font(.title)
                             //
+                            //                        DatePicker(
+                            //                            "Select Date",
+                            //                            selection: $selectedDate,
+                            //                            in: Date()...maxDate,
+                            //                            displayedComponents: [.date])
+                            //                            .datePickerStyle(.graphical)
+                            HorizontalDatePicker(
+                                pickedDate: $selectedDate, dates: nextTenDays)
+                                .onChange(of: selectedDate){oldValue, newValue in weather =
+                                    generateRandomWeather(for: weather.location)
+                                }
+                            
                         }
                         Spacer()
                     }
                     .padding()
-                    .background(Color.white.opacity(0.6))
+                    .background(Color(.systemBackground).opacity(0.3))
                     .cornerRadius(20)
                     .padding()
                     
@@ -151,7 +179,7 @@ struct ContentView: View {
                         
                     }
                     .padding()
-                    .background(Color.white.opacity(0.1))
+                    .background(Color(.systemBackground).opacity(0.1))
                     .cornerRadius(20)
                     .padding()
                 }
