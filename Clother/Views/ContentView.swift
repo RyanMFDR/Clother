@@ -14,18 +14,20 @@ struct ContentView: View {
         NavigationStack {
             ZStack{
                 //background
+
+                
                 LinearGradient(colors: [weather.WeatherCondition.color, Color.white], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea(edges: .all)
-                
-                ///Animation
-                LottieView(animation: .named("Rain.json"))
-                    .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
-                    .offset(y:-80)
-                LottieView(animation: .named("clouds loop.json"))
-                    .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
-                    .offset(y:-340)
-                    .scaleEffect(1)
-                    .blur(radius: 2)
+    
+                ForEach(weather.WeatherCondition.animationLayers) { layer in
+                    LottieView(animation: .named(layer.fileName))
+                        .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+                        .animationSpeed(layer.animationSpeed)
+                        .offset(x: layer.xOffset, y: layer.yOffset)
+                        .scaleEffect(x: layer.scale, y: abs(layer.scale))
+                        .opacity(layer.opacity)
+                        .blur(radius: layer.blur)
+                }
                 
                 //start scroll view
                 ScrollView(.vertical, showsIndicators: false){
@@ -161,5 +163,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(weather: generateRandomWeather(for: "Bali"))
+    ContentView(weather:DailyWeather(temp: "30", feelsLike: "30", high: "30", low: "30", humidity: "30", location: "Bogor", WeatherCondition: .stormy))
 }

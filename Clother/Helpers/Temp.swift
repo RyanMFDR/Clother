@@ -22,6 +22,18 @@ struct DailyWeather : Identifiable {
     //var date
 }
 
+///Weather Animation    
+struct WeatherAnimationLayer: Identifiable {
+    let id = UUID()
+    let fileName: String
+    let animationSpeed: CGFloat
+    let xOffset: CGFloat
+    let yOffset: CGFloat
+    let scale: CGFloat
+    let opacity: CGFloat
+    let blur: CGFloat
+}
+
 //enum Clothes: String, CaseIterable {
 //    case sunny = "Sunny"
 //    case cloudy = "Cloudy"
@@ -75,11 +87,11 @@ enum WeatherCondition: String, CaseIterable {
         case .sunny:
             return .yellow
         case .rainy:
-            return .blue
-        case .cloudy:
             return .gray
+        case .cloudy:
+            return .blue
         case .stormy:
-            return .red
+            return Color(red: 0.08, green: 0.12, blue: 0.22)
         }
     }
     var topClothes: [String] {
@@ -121,10 +133,162 @@ enum WeatherCondition: String, CaseIterable {
         
         }
     }
-//    var backgroundAnimaiton:String {
-//        switch self {
-//        }
-//    }
+    var animationLayers: [WeatherAnimationLayer] {
+        switch self {
+        case .rainy:
+            return [
+                WeatherAnimationLayer(
+                    fileName: "Rain.json",
+                    animationSpeed: 1,
+                    xOffset: 0,
+                    yOffset: -80,
+                    scale: 1.5,
+                    opacity: 1,
+                    blur: 0
+                ),
+                WeatherAnimationLayer(
+                    fileName: "clouds loop.json",
+                    animationSpeed: 0.5,
+                    xOffset: 0,
+                    yOffset: -190,
+                    scale: 2.0,
+                    opacity: 1,
+                    blur: 2
+                )
+            ]
+        case .cloudy:
+            return [
+                WeatherAnimationLayer(
+                    fileName: "cloud.json",
+                    animationSpeed: 1,
+                    xOffset: 0,
+                    yOffset: -80,
+                    scale: 1.5,
+                    opacity: 0.5,
+                    blur: 0
+                ),
+                WeatherAnimationLayer(
+                    fileName: "cloud.json",
+                    animationSpeed: 1,
+                    xOffset: 0,
+                    yOffset: 0,
+                    scale: -1,
+                    opacity: 0.5,
+                    blur: 0
+                ),
+                WeatherAnimationLayer(
+                    fileName: "cloud.json",
+                    animationSpeed: 1,
+                    xOffset: 0,
+                    yOffset: 200,
+                    scale: -1,
+                    opacity: 0.5,
+                    blur: 0
+                ),
+                WeatherAnimationLayer(
+                    fileName: "clouds loop.json",
+                    animationSpeed: 0.5,
+                    xOffset: 0,
+                    yOffset: -190,
+                    scale: 2.0,
+                    opacity: 1,
+                    blur: 2
+                )
+            ]
+        case .sunny:
+            return [
+                WeatherAnimationLayer(
+                    fileName: "Clear Day.json",
+                    animationSpeed: 0.5,
+                    xOffset: -32,
+                    yOffset: -80,
+                    scale: 5.0,
+                    opacity:1,
+                    blur:0
+                ),
+                WeatherAnimationLayer(
+                    fileName: "Hot Effect.json",
+                    animationSpeed: 0.5,
+                    xOffset: -20,
+                    yOffset: 10,
+                    scale: 1,
+                    opacity:0.2,
+                    blur:0
+                ),
+                WeatherAnimationLayer(
+                    fileName: "Hot Effect.json",
+                    animationSpeed: 0.25,
+                    xOffset: 200,
+                    yOffset: 10,
+                    scale: 1,
+                    opacity:0.2,
+                    blur:0
+                )
+            ]
+        case .stormy:
+            return [
+                WeatherAnimationLayer(
+                    fileName: "Rain.json",
+                    animationSpeed: 2.0,
+                    xOffset: 0,
+                    yOffset: -190,
+                    scale: 1.0,
+                    opacity: 1,
+                    blur: 1
+                ),
+                WeatherAnimationLayer(
+                    fileName: "Rain.json",
+                    animationSpeed: 2.0,
+                    xOffset: 0,
+                    yOffset: -190,
+                    scale: 0.5,
+                    opacity: 1,
+                    blur: 2
+                ),
+                WeatherAnimationLayer(
+                    fileName: "clouds loop.json",
+                    animationSpeed: 0.5,
+                    xOffset: 0,
+                    yOffset: -250,
+                    scale: 1.5,
+                    opacity: 0.2,
+                    blur: 4
+                ),
+                WeatherAnimationLayer(
+                    fileName: "lightning.json",
+                    animationSpeed: 0.75,
+                    xOffset: 0,
+                    yOffset: -200,
+                    scale: 1.0,
+                    opacity: 0.1,
+                    blur: 5
+                )
+            ]
+        }
+    }
+    
+    //MARK: - Animation Config
+//    LottieView(animation: .named("Clear Day.json"))
+//        .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+//        .animationSpeed(0.5)
+//        .offset(x:-32)
+//        .offset(y:-80)
+//        .scaleEffect(5.0)
+//    
+//    LottieView(animation: .named("Hot Effect.json"))
+//        .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+//        .animationSpeed(0.5)
+//        .opacity(0.2)
+//        .offset(x:-20)
+//        .offset(y:10)
+//    
+//    LottieView(animation: .named("Hot Effect.json"))
+//        .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+//        .animationSpeed(0.20)
+//        .opacity(0.5)
+//        .offset(x:200)
+//        .offset(y:10)
+
 }
 
 //MARK: - Random Weather Generator
