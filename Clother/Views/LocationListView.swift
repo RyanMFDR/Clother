@@ -7,6 +7,7 @@ import SwiftUI
 
 struct LocationListView: View {
     @State private var showLocPage = false
+//    @State private var selectedLocation :String = ""
     @State private var savedLocations: [DailyWeather] = [
         generateRandomWeather(for: "Jakarta"),
         generateRandomWeather(for: "Jogja"),
@@ -25,6 +26,7 @@ struct LocationListView: View {
                             NavigationLink { ///To Each Main Page
                                 ContentView(weather: item)
                                     .navigationBarBackButtonHidden(true)
+                                
                             } label: { ///The Card
                                 CardLocation(weather: item)
                             }
