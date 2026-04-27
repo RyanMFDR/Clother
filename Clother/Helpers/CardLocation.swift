@@ -45,7 +45,7 @@ struct CardLocation: View {
                 Spacer()
                 
                 VStack(alignment: .trailing, spacing: 18) {
-                    Text(weather.temp)
+                    Text(weather.temp + "°")
                         .font(.system(size: 58, weight: .bold))
                 }
             }
