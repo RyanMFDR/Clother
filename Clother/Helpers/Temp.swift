@@ -87,9 +87,9 @@ enum WeatherCondition: String, CaseIterable {
         case .sunny:
             return .yellow
         case .rainy:
-            return .gray
+            return Color(red: 0.43, green: 0.51, blue: 0.70)
         case .cloudy:
-            return .blue
+            return Color(.lightGray)
         case .stormy:
             return Color(red: 0.08, green: 0.12, blue: 0.22)
         }
@@ -327,11 +327,11 @@ func generateRandomWeather(for city:String) -> DailyWeather {
         }
     
     return DailyWeather(
-        temp: "\(temp)°",
-        feelsLike: "\(temp)°",
-        high: "\(temp)°",
-        low: "\(temp)°",
-        humidity: "80%",
+        temp: "\(temp)",
+        feelsLike: "\(temp + 1)",
+        high: "\(temp)",
+        low: "\(temp)",
+        humidity: "80",
         location: city,
 //        WeatherColor: selectedWeather.1,
         WeatherCondition: selectedWeather,

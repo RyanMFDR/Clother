@@ -5,16 +5,17 @@
 
 import SwiftUI
 
-
-
-
 struct LocationListView: View {
+    
+    //funcs for delete and re-order
     func deleteLocation(at offsets: IndexSet) {
         savedLocations.remove(atOffsets: offsets)
     }
     
     func moveLocation(from source:IndexSet, to destination : Int){
-        savedLocations.move(fromOffsets: source, toOffset: destination)
+        withAnimation {
+            savedLocations.move(fromOffsets: source, toOffset: destination)
+        }
     }
     
     @State private var showLocPage = false
@@ -24,6 +25,7 @@ struct LocationListView: View {
         generateRandomWeather(for: "Jogja"),
         generateRandomWeather(for: "Bali")
     ]
+    
     var body: some View {
         NavigationStack {
             ZStack(alignment:.bottom) {
@@ -50,11 +52,12 @@ struct LocationListView: View {
 //                    .padding(.bottom, 90)
 //                    
 //                }
+                
+                //weather card list
                 List{
                     ForEach(savedLocations) { item in
                         NavigationLink { ///To Each Main Page
                         ContentView(weather: item)
-                        .navigationBarBackButtonHidden(true)
                         
                         
                         } label: { ///The Card
@@ -66,7 +69,7 @@ struct LocationListView: View {
                             .navigationLinkIndicatorVisibility(.hidden)
                     }
                     .onDelete(perform: deleteLocation)
-//                    .onMove(perform: moveLocation)
+                    .onMove(perform: moveLocation)
                 }
                 .listStyle(.plain)
                 .toolbar{

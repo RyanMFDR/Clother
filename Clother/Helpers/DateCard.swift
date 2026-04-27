@@ -13,12 +13,13 @@ struct DateCard: View {
         VStack{
             //day
             Text(date.formatted(.dateTime.weekday(.abbreviated)))
+                .foregroundStyle(Color.secondary)
             //date
             Text(date.formatted(.dateTime.day()))
                 .frame(width: 50, height: 50)
-                .background(isSelected ? Color.blue : Color.white.opacity(0.1))
+                .background(isSelected ? Color.blue : Color.white.opacity(0.3))
                 
-                        .foregroundStyle(isSelected ? .white : .primary)
+                        .foregroundStyle(isSelected ? .white : .secondary)
                         .cornerRadius(50)
                         .shadow(radius: isSelected ? 5 : 0)
         }
@@ -31,7 +32,7 @@ struct HorizontalDatePicker: View {
     let dates : [Date]
     var body: some View{
         ScrollView(.horizontal, showsIndicators: false){
-            HStack(spacing: 10){
+            HStack(spacing: 3){
                 ForEach(dates, id:\.self){date in
                     DateCard(date: date, isSelected: Calendar.current.isDate(date, inSameDayAs: pickedDate))
                         .onTapGesture {

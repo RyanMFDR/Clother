@@ -28,11 +28,10 @@ struct ContentView: View {
         NavigationStack {
             ZStack{
                 //background
-
-                
                 LinearGradient(colors: [weather.WeatherCondition.color, Color(.systemBackground)], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea(edges: .all)
-    
+                
+                //animation layer
                 ForEach(weather.WeatherCondition.animationLayers) { layer in
                     LottieView(animation: .named(layer.fileName))
                         .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
@@ -62,10 +61,12 @@ struct ContentView: View {
                         
                         
                     }
-                    .padding()
-                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .foregroundStyle(.primary)
                     .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 30))
+                    .clipShape(RoundedRectangle(cornerRadius: 40))
+                    
                     //outfit picker
                     ZStack{
                         //                    Image(systemName: "figure.arms.open")
@@ -75,7 +76,6 @@ struct ContentView: View {
                         //                        .foregroundStyle(Color.white)
                         VStack{
                             
-                            //shirt scroller
                             //                        HStack{
                             //                            Image(systemName: "chevron.left")
                             //                            Spacer()
@@ -88,15 +88,17 @@ struct ContentView: View {
                             //                            Spacer()
                             //                            Image(systemName: "chevron.right")
                             //                        }.padding(.horizontal,10)
+                            
+                            //shirt scroller
                             Clothes_Caroussel(clothes: weather.WeatherCondition.topClothes)
                                 .frame(width: .infinity, height: 150)
                                 .clipped(antialiased: false)
                             
+                            //pants scroller
                             Clothes_Caroussel(clothes: weather.WeatherCondition.bottomClothes)
                                 .frame(width: .infinity, height: 150)
                                 .clipped(antialiased: false)
                             
-                            //pants scroller
                             //                        HStack{
                             //                            Image(systemName: "chevron.left")
                             //                            Spacer()
@@ -113,17 +115,20 @@ struct ContentView: View {
                         
                     }
                     
+                    //caption
                     Text("The weather is " + weather.WeatherCondition.rawValue)
                         .font(.title)
                         .fontWeight(.bold)
                     Text(weather.WeatherCondition.clothingDescription)
                         .font(.subheadline)
+                        .foregroundStyle(Color.secondary)
                     
                     //feels like card
                     HStack{
                         Spacer()
                         VStack{
                             Text("Feels Like")
+                                .foregroundStyle(Color.secondary)
                             Text(weather.feelsLike + "°C")
                                 .font(.system(size: 50, weight: .bold))
                             //                        Text(weather.WeatherCondition.rawValue)
@@ -137,9 +142,11 @@ struct ContentView: View {
                             //                            .datePickerStyle(.graphical)
                             HorizontalDatePicker(
                                 pickedDate: $selectedDate, dates: nextTenDays)
+                            
                                 .onChange(of: selectedDate){oldValue, newValue in weather =
                                     generateRandomWeather(for: weather.location)
                                 }
+                                .padding(3)
                             
                         }
                         Spacer()
