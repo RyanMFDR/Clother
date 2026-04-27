@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "ClotherIcon-3.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

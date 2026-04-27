@@ -7,6 +7,8 @@
 
 import SwiftUI
 import AVKit
+import Lottie
+
 
 struct CardLocation: View {
     var weather : DailyWeather
@@ -17,8 +19,8 @@ struct CardLocation: View {
     
             LinearGradient(
                 colors: [
-                    Color.black.opacity(0.25),
-                    Color.black.opacity(0.45)
+                    Color(.systemBackground).opacity(0.25),
+                    Color(.systemBackground).opacity(0.45)
                 ],
                 startPoint: .top,
                 endPoint: .bottom
@@ -47,7 +49,7 @@ struct CardLocation: View {
                         .font(.system(size: 58, weight: .bold))
                 }
             }
-            .foregroundColor(.white)
+            .foregroundColor(.primary)
             .padding()
         }
         .frame(height: 180)
@@ -60,34 +62,55 @@ struct CardLocation: View {
         .padding(.horizontal)
     }
 }
-
+//
+//struct cardBackground: View {
+//    var condition : WeatherCondition
+//    var body: some View {
+//        VideoPlayer(player: makePlayer())
+//            .scaledToFill()
+//            .disabled(true)
+//    }
+//    func makePlayer() -> AVPlayer {
+//        guard let url = Bundle.main.url(forResource: condition.rawValue, withExtension: "mp4") else {
+//            return AVPlayer()
+//        }
+//        let player = AVPlayer(url: url)
+//        
+//        player.isMuted = true
+//        player.play()
+//        player.actionAtItemEnd = .none
+//        
+//        NotificationCenter.default.addObserver(
+//            forName: .AVPlayerItemDidPlayToEndTime,
+//            object: player.currentItem,
+//            queue: .main
+//        ) { _ in
+//            player.seek(to: .zero)
+//            player.play()
+//        }
+//        
+//        return player
+//    }
+//}
 struct cardBackground: View {
     var condition : WeatherCondition
     var body: some View {
-        VideoPlayer(player: makePlayer())
-            .scaledToFill()
-            .disabled(true)
-    }
-    func makePlayer() -> AVPlayer {
-        guard let url = Bundle.main.url(forResource: condition.rawValue, withExtension: "mp4") else {
-            return AVPlayer()
+        ZStack {
+            LinearGradient(colors: [condition.color, Color(.systemBackground)], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea(edges: .all)
+            
+            
+            ForEach(condition.animationLayers) { layer in
+                LottieView(animation: .named(layer.fileName))
+                    .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+                    .animationSpeed(layer.animationSpeed)
+                    .offset(x: 0, y: 0)
+                    .scaleEffect(x: layer.scale, y: abs(layer.scale))
+                    .opacity(layer.opacity)
+                    .blur(radius: layer.blur)
+                    .allowsHitTesting(false)
+            }
         }
-        let player = AVPlayer(url: url)
-        
-        player.isMuted = true
-        player.play()
-        player.actionAtItemEnd = .none
-        
-        NotificationCenter.default.addObserver(
-            forName: .AVPlayerItemDidPlayToEndTime,
-            object: player.currentItem,
-            queue: .main
-        ) { _ in
-            player.seek(to: .zero)
-            player.play()
-        }
-        
-        return player
     }
 }
 

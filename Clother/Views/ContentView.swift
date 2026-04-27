@@ -9,6 +9,7 @@ import SwiftUI
 import Lottie
 
 struct ContentView: View {
+    @Environment(\.dismiss) var dismiss
     @State private var selectedDate = Date()
     
 //    let selectedLocation : String
@@ -29,7 +30,7 @@ struct ContentView: View {
                 //background
 
                 
-                LinearGradient(colors: [weather.WeatherCondition.color, Color..systemBackground], startPoint: .top, endPoint: .bottom)
+                LinearGradient(colors: [weather.WeatherCondition.color, Color(.systemBackground)], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea(edges: .all)
     
                 ForEach(weather.WeatherCondition.animationLayers) { layer in
@@ -47,9 +48,11 @@ struct ContentView: View {
                     Spacer()
                     HStack{
                         Image(systemName: "location.fill")
-                        NavigationLink{
-                            LocationListView()
-                                .navigationBarBackButtonHidden(true)
+                        Button{
+//                            LocationListView()
+//                                .navigationBarBackButtonHidden(true)
+                            dismiss()
+                            
                         } label:{
                             Text(weather.location)
                                 .font(.title3)
@@ -59,6 +62,10 @@ struct ContentView: View {
                         
                         
                     }
+                    .padding()
+                    .foregroundStyle(.secondary)
+                    .background(.ultraThinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 30))
                     //outfit picker
                     ZStack{
                         //                    Image(systemName: "figure.arms.open")
@@ -117,7 +124,7 @@ struct ContentView: View {
                         Spacer()
                         VStack{
                             Text("Feels Like")
-                            Text(weather.feelsLike + "C")
+                            Text(weather.feelsLike + "°C")
                                 .font(.system(size: 50, weight: .bold))
                             //                        Text(weather.WeatherCondition.rawValue)
                             //                            .font(.title)
@@ -138,7 +145,7 @@ struct ContentView: View {
                         Spacer()
                     }
                     .padding()
-                    .background(Color(.systemBackground).opacity(0.3))
+                    .background(.ultraThinMaterial)
                     .cornerRadius(20)
                     .padding()
                     
@@ -147,41 +154,41 @@ struct ContentView: View {
                         HStack{
                             Text("Temperature")
                             Spacer()
-                            Text(weather.temp)
+                            Text(weather.temp + "°C")
                         }
                         Divider()
                         
                         HStack{
                             Text("Feels Like")
                             Spacer()
-                            Text(weather.feelsLike)
+                            Text(weather.feelsLike + "°C")
                         }
                         Divider()
                         
                         HStack{
                             Text("High")
                             Spacer()
-                            Text(weather.high)
+                            Text(weather.high + "°C")
                         }
                         Divider()
                         
                         HStack{
                             Text("Low")
                             Spacer()
-                            Text(weather.low)
+                            Text(weather.low + "°C")
                         }
                         Divider()
                         
                         HStack{
                             Text("Humidity")
                             Spacer()
-                            Text(weather.humidity)
+                            Text(weather.humidity + "%")
                         }
                         
                         
                     }
                     .padding()
-                    .background(Color(.systemBackground).opacity(0.1))
+                    .background(.ultraThinMaterial)
                     .cornerRadius(20)
                     .padding()
                 }
