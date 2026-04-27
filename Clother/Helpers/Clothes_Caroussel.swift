@@ -55,6 +55,7 @@ struct Clothes_Caroussel: View {
                         .scaledToFit()
                         .frame(width: 300, height: 150)
                         .tag(index)
+                        .shadow(radius: 5)
                 }
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             HStack{

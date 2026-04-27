@@ -5,7 +5,18 @@
 
 import SwiftUI
 
+
+
+
 struct LocationListView: View {
+    func deleteLocation(at offsets: IndexSet) {
+        savedLocations.remove(atOffsets: offsets)
+    }
+    
+    func moveLocation(from source:IndexSet, to destination : Int){
+        savedLocations.move(fromOffsets: source, toOffset: destination)
+    }
+    
     @State private var showLocPage = false
 //    @State private var selectedLocation :String = ""
     @State private var savedLocations: [DailyWeather] = [
@@ -20,23 +31,48 @@ struct LocationListView: View {
                     .ignoresSafeArea()
                 
                 //cardLocation
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 16) {
-                        ForEach(savedLocations) { item in
-                            NavigationLink { ///To Each Main Page
-                                ContentView(weather: item)
-                                    .navigationBarBackButtonHidden(true)
-                                
-                            } label: { ///The Card
-                                CardLocation(weather: item)
-                            }
+//                ScrollView(showsIndicators: false) {
+//                    VStack(spacing: 16) {
+//                        
+//                        ForEach(savedLocations) { item in
+//                            NavigationLink { ///To Each Main Page
+//                                ContentView(weather: item)
+//                                    .navigationBarBackButtonHidden(true)
+//                                
+//                                
+//                            } label: { ///The Card
+//                                CardLocation(weather: item)
+//                            }
+//                        }
+//                    }
+//                    
+//                    .padding(.top, 10)
+//                    .padding(.bottom, 90)
+//                    
+//                }
+                List{
+                    ForEach(savedLocations) { item in
+                        NavigationLink { ///To Each Main Page
+                        ContentView(weather: item)
+                        .navigationBarBackButtonHidden(true)
+                        
+                        
+                        } label: { ///The Card
+                        CardLocation(weather: item)
                         }
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+                            .navigationLinkIndicatorVisibility(.hidden)
                     }
-                    
-                    .padding(.top, 10)
-                    .padding(.bottom, 90)
-                    
+                    .onDelete(perform: deleteLocation)
+//                    .onMove(perform: moveLocation)
                 }
+                .listStyle(.plain)
+                .toolbar{
+                    EditButton()
+                }
+                
                 
                 //searchBar
                 Button {
@@ -46,7 +82,7 @@ struct LocationListView: View {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
                         
-                        Text("Search for a city or airport")
+                        Text("Search and add a city")
                             .foregroundColor(.gray)
                         
                         Spacer()
@@ -63,12 +99,13 @@ struct LocationListView: View {
             }
             .navigationTitle("Location")
             .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Edit") {
-                    }
-                }
-            }.navigationDestination(isPresented: $showLocPage) {
+//            .toolbar {
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    Button("Edit") {
+//                    }
+//                }
+//            }
+            .navigationDestination(isPresented: $showLocPage) {
                 LocPage( ///Navigate to LocPage
                     savedLocations : $savedLocations,
                     showLocPage: $showLocPage

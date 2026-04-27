@@ -104,7 +104,7 @@ struct LocPage: View {
                         .foregroundColor(.gray)
                 }
                 .padding()
-                .background(Color.white)
+                .background(Color(.systemBackground))
                 .cornerRadius(40)
                 .frame(width: 346, height: 24,alignment: .center)
 //MARK: -
@@ -126,7 +126,7 @@ struct LocPage: View {
                                 HStack {
                                     Text(location)
                                         .fontWeight(.semibold)
-                                        .foregroundStyle(Color.white)
+                                        .foregroundStyle(Color.primary)
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             }
